@@ -1,72 +1,69 @@
-<!-- filepath: templates/treeIdentifier.html-->
 <!DOCTYPE html>
+<html>
+<head>
+    <title>Tree Identifier</title>
 </head>
 <body>
     <h1>Tree Identifier</h1>
     <form method="post">
         <label>Is the leaf simple or compound? (e.g., simple, compound):</label>
-        <input name="leaf_type"><br><br>
+        <input name="leaf_type" value="{{ user_description.leaf_type }}"><br><br>
 
         <label>How many leaflets, or needles in a cluster? (comma separated for multiple values, e.g., 5, 7, 9):</label>
-        <input name="leaf_number"><br><br>
+        <input name="leaf_number" value="{{ user_description.leaf_number }}"><br><br>
 
         <label>How is the leaf shaped? (e.g., lobed, palmate, oval, elliptical, needles, diamond, lanceolate, ovate, heart-shaped):</label>
-        <input name="leaf_shape"><br><br>
+        <input name="leaf_shape" value="{{ user_description.leaf_shape }}"><br><br>
 
         <label>What is the size of the leaf? (e.g., small, medium, large):</label>
-        <input name="leaf_size"><br><br>
+        <input name="leaf_size" value="{{ user_description.leaf_size }}"><br><br>
 
         <label>What is the leaf color? (e.g., green, yellow, brown, red, orange, purple, gold):</label>
-        <input name="leaf_color"><br><br>
+        <input name="leaf_color" value="{{ user_description.leaf_color }}"><br><br>
 
         <label>What is the leaf edge like? (e.g., smooth, serrated, deeply lobed):</label>
-        <input name="leaf_edge"><br><br>
+        <input name="leaf_edge" value="{{ user_description.leaf_edge }}"><br><br>
 
         <label>What is the leaf venation? (e.g., pinnate, palmate):</label>
-        <input name="venation"><br><br>
+        <input name="venation" value="{{ user_description.venation }}"><br><br>
 
         <label>How is the texture of the leaf? (e.g., smooth, rough):</label>
-        <input name="texture"><br><br>
+        <input name="texture" value="{{ user_description.texture }}"><br><br>
 
         <label>What color does the leaf turn in autumn? (e.g., red, yellow, orange, copper, evergreen):</label>
-        <input name="leaf_autum"><br><br>
+        <input name="leaf_autum" value="{{ user_description.leaf_autum }}"><br><br>
 
         <input type="submit" value="Identify">
     </form>
-    
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-
-    {% if identified_tree %}
-        <h2>Identified Tree:</h2>
-        <p>{{ identified_tree }}</p>
-    {% endif %}
-
-    {% if not identified_tree and not error %}
-        <h2>Tree Not Identified</h2>
-        <p>Please check your inputs or try again.</p>
-    {% endif %}
-
-    {% if leaf_type %}
-        <h2>Leaf Type: {{ leaf_type }}</h2>
-    {% endif %}
 
     {% if matches %}
-        <h2>Matches Found:</h2>
-        <ul>
-        {% for name, score in matches %}
-            <li>{{ name }} (score: {{ score }})</li>
-        {% endfor %}
-        </ul>
-    {% endif %} 
-    <!-- {% if matches %}
-        <h2>Possible Matches:</h2>
-        <ul>
-        {% for name, score in matches %}
-            <li>{{ name }} (score: {{ score }})</li>
-        {% endfor %}
-        </ul>
-    {% endif %} -->
+        <h2>Top 3 Possible Matches:</h2>
+        <form method="post">
+            <!-- Preserve user input as hidden fields -->
+            <input type="hidden" name="leaf_type" value="{{ user_description.leaf_type }}">
+            <input type="hidden" name="leaf_number" value="{{ user_description.leaf_number }}">
+            <input type="hidden" name="leaf_shape" value="{{ user_description.leaf_shape }}">
+            <input type="hidden" name="leaf_size" value="{{ user_description.leaf_size }}">
+            <input type="hidden" name="leaf_color" value="{{ user_description.leaf_color }}">
+            <input type="hidden" name="leaf_edge" value="{{ user_description.leaf_edge }}">
+            <input type="hidden" name="venation" value="{{ user_description.venation }}">
+            <input type="hidden" name="texture" value="{{ user_description.texture }}">
+            <input type="hidden" name="leaf_autum" value="{{ user_description.leaf_autum }}">
+            <ul>
+            {% for name, score in matches[:3] %}
+                <li>
+                    <input type="radio" name="tree_choice" value="{{ name }}" id="{{ name }}">
+                    <label for="{{ name }}">{{ name }} (score: {{ score }})</label>
+                </li>
+            {% endfor %}
+            </ul>
+            <input type="submit" name="get_description" value="Get Description">
+        </form>
+    {% endif %}
+
+    {% if description %}
+        <h2>Description:</h2>
+        <p>{{ description }}</p>
+    {% endif %}
 </body>
 </html>

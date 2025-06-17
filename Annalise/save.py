@@ -359,55 +359,76 @@ def ask_leaf_attributes():
     }
 
 # Function to identify possible trees based on user input
-from flask import Flask, render_template, request # type: ignore
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
+# --- Place your 'trees' list and 'case_insensitive_match' function here ---
+
+def case_insensitive_match(user_value, tree_values):
+    if not isinstance(tree_values, list):
+        tree_values = [tree_values]
+    if isinstance(user_value, list):
+        for val in user_value:
+            if case_insensitive_match(val, tree_values):
+                return True
+    else:
+        for val in tree_values:
+            if isinstance(val, str) and str(user_value).strip().lower() == str(val).strip().lower():
+                return True
+    return False
+
 def identify_tree(user_description, trees):
     match_scores = []
     total_attributes = len(user_description)
-
     for tree in trees:
         score = 0
-        
         for key, user_value in user_description.items():
             tree_value = tree.get(key)
-
             if not tree_value:
                 continue
-
             tree_values = tree_value if isinstance(tree_value, list) else [tree_value]
-
             if case_insensitive_match(user_value, tree_values):
                 score += 1
-        
         if score >= total_attributes / 2:
             match_scores.append((tree['name'], score))
-
     match_scores.sort(key=lambda x: x[1], reverse=True)
     return match_scores
-
-# Main execution: ask for user inputs and show possible tree matches
-
-
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     matches = []
+    description = None
+    user_description = {
+        "leaf_type": "",
+        "leaf_number": "",
+        "leaf_shape": "",
+        "leaf_size": "",
+        "leaf_color": "",
+        "leaf_edge": "",
+        "venation": "",
+        "texture": "",
+        "leaf_autum": "",
+    }
     if request.method == 'POST':
         user_description = {
-            "leaf_type": request.form.get("leaf_type"),
-            "leaf_number": request.form.get("leaf_number"),
-            "leaf_shape": request.form.get("leaf_shape"),
-            "leaf_size": request.form.get("leaf_size"),
-            "leaf_color": request.form.get("leaf_color"),
-            "leaf_edge": request.form.get("leaf_edge"),
-            "venation": request.form.get("venation"),
-            "texture": request.form.get("texture"),
-            "leaf_autum": request.form.get("leaf_autum"),
+            "leaf_type": request.form.get("leaf_type", ""),
+            "leaf_number": request.form.get("leaf_number", ""),
+            "leaf_shape": request.form.get("leaf_shape", ""),
+            "leaf_size": request.form.get("leaf_size", ""),
+            "leaf_color": request.form.get("leaf_color", ""),
+            "leaf_edge": request.form.get("leaf_edge", ""),
+            "venation": request.form.get("venation", ""),
+            "texture": request.form.get("texture", ""),
+            "leaf_autum": request.form.get("leaf_autum", ""),
         }
         matches = identify_tree(user_description, trees)
-    return render_template('treeIdentifier.html', matches=matches)
+        if request.form.get("get_description") and request.form.get("tree_choice"):
+            chosen = request.form.get("tree_choice")
+            for tree in trees:
+                if tree["name"] == chosen:
+                    description = tree.get("description", "No description available.")
+    return render_template('treeIdentifier.html', matches=matches, description=description, user_description=user_description)
 
 if __name__ == '__main__':
     app.run(debug=True)
