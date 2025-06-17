@@ -1,8 +1,4 @@
-from flask import Flask, render_template # type: ignore
 
-
-if __name__ == '__main__':
-    app.run(debug=True) # type: ignore
 import re
 #import treeIdentifier.html as html
 # List of tree descriptions
@@ -363,6 +359,7 @@ def ask_leaf_attributes():
     }
 
 # Function to identify possible trees based on user input
+from flask import Flask, render_template, request # type: ignore
 
 app = Flask(__name__)
 def identify_tree(user_description, trees):
@@ -390,27 +387,27 @@ def identify_tree(user_description, trees):
     return match_scores
 
 # Main execution: ask for user inputs and show possible tree matches
-@app.route('/')
+
+
+
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    message = identify_tree
-    user_description = ask_leaf_attributes()
-    matches = identify_tree(user_description, trees)
-    print("\nPossible matches (sorted):")
-    for match in matches:
-        print(f"{match[0]} - Match score: {match[1]}")
+    matches = []
+    if request.method == 'POST':
+        user_description = {
+            "leaf_type": request.form.get("leaf_type"),
+            "leaf_number": request.form.get("leaf_number"),
+            "leaf_shape": request.form.get("leaf_shape"),
+            "leaf_size": request.form.get("leaf_size"),
+            "leaf_color": request.form.get("leaf_color"),
+            "leaf_edge": request.form.get("leaf_edge"),
+            "venation": request.form.get("venation"),
+            "texture": request.form.get("texture"),
+            "leaf_autum": request.form.get("leaf_autum"),
+        }
+        matches = identify_tree(user_description, trees)
+    return render_template('treeIdentifier.html', matches=matches)
 
-    top_matches = matches[:3]
-    print("\nTop possible matches:")
-    for i, (name, score) in enumerate(top_matches, 1):
-        print(f"{i}. {name} (score: {score})")
-
-    choice = input("Enter the number of the tree you'd like more information about: ")
-    if choice.isdigit():
-        index = int(choice) - 1
-        if 0 <= index < len(top_matches):
-            tree_name = top_matches[index][0]
-            for tree in trees:
-                if tree["name"] == tree_name:
-                    print(f"\nMore about {tree['name']}:")
-                    print(tree.get("description", "No description available."))
-    return render_template('treeIdentifier.html', message=identify_tree())
+if __name__ == '__main__':
+    app.run(debug=True)
