@@ -1,11 +1,72 @@
 <!-- filepath: templates/treeIdentifier.html-->
 <!DOCTYPE html>
-<html>
+</head>
 <body>
-  <h1>Tree Identifier App</h1>
-  <form method="post">
-    Leaf Type: <input name="leaf_type"><br>
-    <input type="submit" value="Identify">
-  </form>
+    <h1>Tree Identifier</h1>
+    <form method="post">
+        <label>Is the leaf simple or compound? (e.g., simple, compound):</label>
+        <input name="leaf_type"><br><br>
+
+        <label>How many leaflets, or needles in a cluster? (comma separated for multiple values, e.g., 5, 7, 9):</label>
+        <input name="leaf_number"><br><br>
+
+        <label>How is the leaf shaped? (e.g., lobed, palmate, oval, elliptical, needles, diamond, lanceolate, ovate, heart-shaped):</label>
+        <input name="leaf_shape"><br><br>
+
+        <label>What is the size of the leaf? (e.g., small, medium, large):</label>
+        <input name="leaf_size"><br><br>
+
+        <label>What is the leaf color? (e.g., green, yellow, brown, red, orange, purple, gold):</label>
+        <input name="leaf_color"><br><br>
+
+        <label>What is the leaf edge like? (e.g., smooth, serrated, deeply lobed):</label>
+        <input name="leaf_edge"><br><br>
+
+        <label>What is the leaf venation? (e.g., pinnate, palmate):</label>
+        <input name="venation"><br><br>
+
+        <label>How is the texture of the leaf? (e.g., smooth, rough):</label>
+        <input name="texture"><br><br>
+
+        <label>What color does the leaf turn in autumn? (e.g., red, yellow, orange, copper, evergreen):</label>
+        <input name="leaf_autum"><br><br>
+
+        <input type="submit" value="Identify">
+    </form>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if identified_tree %}
+        <h2>Identified Tree:</h2>
+        <p>{{ identified_tree }}</p>
+    {% endif %}
+
+    {% if not identified_tree and not error %}
+        <h2>Tree Not Identified</h2>
+        <p>Please check your inputs or try again.</p>
+    {% endif %}
+
+    {% if leaf_type %}
+        <h2>Leaf Type: {{ leaf_type }}</h2>
+    {% endif %}
+
+    {% if matches %}
+        <h2>Matches Found:</h2>
+        <ul>
+        {% for name, score in matches %}
+            <li>{{ name }} (score: {{ score }})</li>
+        {% endfor %}
+        </ul>
+    {% endif %} 
+    {% if matches %}
+        <h2>Possible Matches:</h2>
+        <ul>
+        {% for name, score in matches %}
+            <li>{{ name }} (score: {{ score }})</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
