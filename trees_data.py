@@ -10,7 +10,8 @@ trees = [
         "venation": "pinnate",
         "texture": "rough",
         "leaf_autum": ["red","brown"],
-        "description": "White Oak (Quercus alba) is a large, long-lived hardwood tree with deeply lobed leaves and a strong, straight trunk. It grows in a variety of habitats and its leaves turn red or brown in autumn. The wood is highly valued for furniture and flooring."
+        "description": "White Oak (Quercus alba) is a large, long-lived hardwood tree with deeply lobed leaves and a strong, straight trunk. It grows in a variety of habitats and its leaves turn red or brown in autumn. The wood is highly valued for furniture and flooring.",
+        "image": "oak_tree.jpeg"
     },
     {
         "name": "Red Oak",
@@ -23,7 +24,8 @@ trees = [
         "venation": "pinnate",
         "texture": "rough",
         "leaf_autum": ["red"],
-        "description": "Red Oak (Quercus rubra) is a fast-growing hardwood tree with pointed, sharply lobed leaves. It's commonly found in upland forests and turns bright red in fall. Its wood is used in construction and cabinetry."
+        "description": "Red Oak (Quercus rubra) is a fast-growing hardwood tree with pointed, sharply lobed leaves. It's commonly found in upland forests and turns bright red in fall. Its wood is used in construction and cabinetry.",
+        "image": "oak_tree.jpeg"
     },
     {
         "name": "Red Maple",
@@ -36,6 +38,7 @@ trees = [
         "venation": "palmate",
         "texture": "smooth",
         "leaf_autum": ["red","yellow"],
+        "image": "red_maple.jpeg",
         "description": "Red Maple (Acer rubrum) is one of the most widespread trees in eastern North America. It has palmate leaves that turn vibrant red or yellow in autumn. It thrives in a wide range of soil types and is often planted for its ornamental value."
     },
     {
@@ -49,6 +52,7 @@ trees = [
         "venation": "palmate",
         "texture": "smooth",
         "leaf_autum": ["red","orange","yellow"],
+        "image": "sugar_maple.jpeg",
         "description": "Sugar Maple (Acer saccharum) is famous for its brilliant fall foliage—ranging from orange to red—and for being the primary source of maple syrup. It prefers moist, well-drained soils and can grow quite large."
     },
     {
@@ -62,6 +66,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "birch_tree.jpeg",
         "description": "Birch trees (Betula spp.) are medium-sized trees with smooth, often peeling bark and diamond or oval-shaped leaves. In Virginia, Yellow and River Birch are most common. Leaves are serrated and turn yellow in fall."
     },
     {
@@ -75,6 +80,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "tulip_poplar.jpeg",
         "description": "Tulip Poplar (Liriodendron tulipifera) is one of the tallest native trees in Virginia. It has large, uniquely shaped leaves and greenish-yellow tulip-like flowers in spring. Leaves turn bright yellow in fall."
     },
     {
@@ -88,6 +94,7 @@ trees = [
         "venation": "parallel",
         "texture": "smooth",
         "leaf_autum": "evergreen",
+        "image": "eastern_hemlock.jpeg",
         "description": "Eastern Hemlock (Tsuga canadensis) is an evergreen conifer with short, flat needles and drooping branches. It prefers cool, shady areas and moist soils, often found in ravines and along streams."
     },
     {
@@ -101,6 +108,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": ["yellow","orange","copper"],
+        "image": "american_beech.jpeg",
         "description": "American Beech (Fagus grandifolia) has smooth, gray bark and toothed, elliptical leaves that turn copper or golden-yellow in autumn. It forms dense shade and grows slowly but steadily in rich woodlands."
     },
     {
@@ -114,6 +122,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": ["yellow","orange"],
+        "image": "black_cherry.jpeg",
         "description": "Black Cherry (Prunus serotina) is a medium-sized tree with glossy, serrated leaves and dark, flaky bark. In spring, it produces clusters of white flowers, followed by small, dark fruits. Its wood is prized in fine woodworking."
     },
     {
@@ -127,6 +136,7 @@ trees = [
         "venation": "parallel",
         "texture": "smooth",
         "leaf_autum": "evergreen",
+        "image": "white_pine.jpeg",
         "description": "White Pine (Pinus strobus) is a tall, straight conifer with soft, flexible needles grouped in clusters of five. It grows fast and is used extensively for lumber. It remains green year-round and is found in cool, dry sites."
     },
     {
@@ -140,6 +150,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "black_walnut.jpeg",
         "description": "Black Walnut (Juglans nigra) is known for its high-quality dark wood and large edible nuts. It has compound leaves and rough bark. Found in rich, moist soils, it’s valued for both wildlife and commercial use."
     },
 
@@ -154,6 +165,7 @@ trees = [
         "venation": "palmate",
         "texture": "rough",
         "leaf_autum": ["yellow"],
+        "image": "american_sycamore.jpeg",
         "description": "American Sycamore (Platanus occidentalis) is a large, fast-growing tree often found near streams and rivers. Its broad, palmate leaves turn yellow in autumn. The tree's bark is distinctive, peeling in large patches to reveal white inner bark."
     },
     {
@@ -167,6 +179,7 @@ trees = [
         "venation": "palmate",
         "texture": "smooth",
         "leaf_autum": ["yellow", "red", "purple"],
+        "image": "sweetgum_tree.jpeg",
         "description": "Sweetgum (Liquidambar styraciflua) is a medium-sized tree known for its star-shaped leaves. In autumn, its leaves turn vibrant shades of yellow, red, and purple. Sweetgum is often found in wet soils and is used for its hardwood in furniture and flooring."
     },
     {
@@ -180,6 +193,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": ["yellow", "purple"],
+        "image": "white_ash.jpeg",
         "description": "White Ash (Fraxinus americana) is a tall deciduous tree with compound leaves that turn yellow or purple in the fall. It is commonly used for making baseball bats and furniture. White Ash grows in a variety of soil types, thriving in moist conditions."
     },
     {
@@ -193,6 +207,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": ["yellow", "brown"],
+        "image": "pecan_tree.jpeg",
         "description": "Pecan (Carya illinoinensis) is a large tree known for its edible nuts and tall, spreading canopy. Its long, lanceolate leaves have serrated edges and turn yellow or brown in autumn. Pecans grow best in deep, moist soils along rivers and floodplains."
     },
     {
@@ -206,6 +221,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "black_locust.jpeg",
         "description": "Black Locust (Robinia pseudoacacia) is a fast-growing, medium-sized tree with compound leaves and fragrant white flowers in spring. Its leaves turn yellow in autumn. The wood is durable and often used for fence posts, and the tree is commonly found in disturbed habitats."
     },
     {
@@ -219,6 +235,7 @@ trees = [
         "venation": "palmate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "redbud_tree.jpeg",
         "description": "Redbud (Cercis canadensis) is a small to medium-sized tree, often used for ornamental purposes due to its stunning spring flowers, which range from purple to pink. The heart-shaped leaves turn bright yellow in autumn."
     },
     {
@@ -232,6 +249,7 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": "yellow",
+        "image": "boxelder_tree.jpeg",
         "description": "Boxelder (Acer negundo) is a small to medium-sized deciduous tree with compound leaves and greenish-yellow flowers in spring. Its leaves turn yellow in the fall, and the tree is commonly found in disturbed sites along rivers or floodplains."
     },
     {
@@ -245,6 +263,7 @@ trees = [
         "venation": "pinnate",
         "texture": "rough",
         "leaf_autum": ["red", "brown"],
+        "image": "oak_tree.jpeg",
         "description": "Northern Red Oak (Quercus rubra) is a large, fast-growing tree with pointed lobed leaves that turn red or brown in autumn. It is native to the northeastern U.S. but also grows in parts of Virginia. Its wood is widely used for furniture and flooring."
     },
     {
@@ -258,6 +277,7 @@ trees = [
         "venation": "pinnate",
         "texture": "rough",
         "leaf_autum": "yellow",
+        "image": "shagbark_hickory.jpeg",
         "description": "Shagbark Hickory (Carya ovata) is a large tree with unique, shaggy bark. Its compound leaves turn yellow in the fall. The nuts are edible and are prized by wildlife. This tree is common in well-drained upland soils."
     },
     {
@@ -271,6 +291,203 @@ trees = [
         "venation": "pinnate",
         "texture": "smooth",
         "leaf_autum": ["yellow", "orange"],
+        "image": "hornbeam_tree.jpeg",
         "description": "Hornbeam (Carpinus caroliniana) is a small to medium-sized tree often found in moist woodlands and along streams. It has finely serrated, ovate leaves that turn yellow or orange in the fall. The wood is tough and is used for tool handles and other sturdy items."
-    }
+    },
+    {
+        "name": "Elm",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "ovate",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "serrated",
+        "venation": "pinnate",
+        "texture": "rough",
+        "leaf_autum": ["yellow", "brown","gold"],
+        "image": "elm_tree.jpeg",
+        "description": "Elm trees (Ulmus spp.) are medium to large deciduous trees with serrated, ovate leaves. They are commonly found in urban areas and along roadsides. The leaves turn yellow, brown, or gold in autumn. Elms are known for their distinctive, serrated leaves and are often used for shade in parks and streets."
+    },
+    {
+        "name": "Willow",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "lanceolate",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "gold"],
+        "image": "willow_tree.jpeg",
+        "description": "Willow trees (Salix spp.) are known for their long, slender leaves and graceful, drooping branches. They thrive in wet areas and are often found near rivers and lakes. The leaves turn yellow or gold in autumn."
+    },
+    {
+        "name": "Cottonwood",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "triangular",
+        "leaf_size": "large",
+        "leaf_color": "green",
+        "leaf_edge": "serrated",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "gold"],
+        "image": "cottonwood_tree.jpeg",
+        "description": "Cottonwood (Populus deltoides) is a large tree often found near rivers and streams. It has triangular leaves that turn yellow or gold in autumn. The tree is known for its rapid growth and soft wood, which is used in various applications."      
+    },
+    {
+        "name": "Hickory",
+        "leaf_type": "compound",
+        "leaf_number": ["5", "7", "9"],
+        "leaf_shape": "lanceolate",
+        "leaf_size": "large",
+        "leaf_color": "green",
+        "leaf_edge": "serrated",
+        "venation": "pinnate",
+        "texture": "rough",
+        "leaf_autum": ["yellow", "brown"],  
+        "image": "hickory_tree.jpeg",
+        "description": "Hickory trees (Carya spp.) are large deciduous trees known for their hard, dense wood and edible nuts. They have compound leaves that turn yellow or brown in autumn. Hickories are often found in mixed hardwood forests and are valued for their timber and nuts."
+    },
+    {
+        "name": "Persimmon",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "oval",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "orange"],
+        "image": "persimmon_tree.jpeg",
+        "description": "Persimmon (Diospyros virginiana) is a small to medium-sized tree known for its sweet, edible fruit. It has smooth, oval leaves that turn yellow or orange in autumn. Persimmons are often found in dry, sandy soils and are valued for their fruit and ornamental qualities."
+    },
+    {
+        "name": "Cherry",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "oval",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "serrated",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "orange"],
+        "image": "cherry_tree.jpeg",
+        "description": "Cherry trees (Prunus spp.) are known for their beautiful spring blossoms and edible fruit. They have serrated, oval leaves that turn yellow or orange in autumn. Cherry trees are often planted for their ornamental value and are found in a variety of habitats."
+    },
+    {
+        "name": "Dogwood",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "ovate",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["red", "purple"],
+        "image": "dogwood_tree.jpeg",
+        "description": "Dogwood (Cornus spp.) is a small to medium-sized tree known for its showy flowers and distinctive bark. It has smooth, ovate leaves that turn red or purple in autumn. Dogwoods are often used as ornamental trees in gardens and landscapes."
+    },
+    {
+        "name": "Magnolia",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "oval",
+        "leaf_size": "large",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "pinnate",  
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "brown"],
+        "image": "magnolia_tree.jpeg",
+        "description": "Magnolia trees (Magnolia spp.) are known for their large, fragrant flowers and glossy leaves. They have smooth, oval leaves that turn yellow or brown in autumn. Magnolias are often used as ornamental trees and are found in a variety of habitats."
+    },
+    {
+        "name": "Loblolly Pine",
+        "leaf_type": "compound",
+        "leaf_number": ["3", "5"],
+        "leaf_shape": "needles",
+        "leaf_size": "large",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "parallel",
+        "texture": "smooth",
+        "leaf_autum": "evergreen",
+        "image": "pine_tree.jpeg",
+        "description": "Loblolly Pine (Pinus taeda) is a fast-growing conifer commonly found in the southeastern U.S. It has long, slender needles grouped in bundles of three. The tree is often used for timber and pulpwood, and it thrives in wet, acidic soils."  
+    },
+    {   
+        "name": "Shortleaf Pine",
+        "leaf_type": "compound",
+        "leaf_number": ["2", "3"],
+        "leaf_shape": "needles",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "parallel",
+        "texture": "smooth",
+        "leaf_autum": "evergreen",
+        "image": "pine_tree.jpeg",
+        "description": "Shortleaf Pine (Pinus echinata) is a medium-sized conifer with short, slender needles. It is commonly found in dry, upland areas and is valued for its timber. The tree has a distinctive, irregular crown and remains green year-round."
+    },
+    {
+        "name": "Virginia Pine",
+        "leaf_type": "compound",
+        "leaf_number": ["2", "3"],
+        "leaf_shape": "needles",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "parallel",
+        "texture": "smooth",
+        "leaf_autum": "evergreen",
+        "image": "pine_tree.jpeg",
+        "description": "Virginia Pine (Pinus virginiana) is a small to medium-sized conifer with twisted, two-needle clusters. It is often found in poor, dry soils and is used for timber and erosion control. The tree has a distinctive, irregular crown and remains green year-round."
+    },
+    {  
+        "name": "Eastern Red Cedar",
+        "leaf_type": "compound",
+        "leaf_number": ["4", "5"],
+        "leaf_shape": "needles",
+        "leaf_size": "small",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "parallel",
+        "texture": "smooth",
+        "leaf_autum": "evergreen",
+        "image": "cedar_tree.jpeg",
+        "description": "Eastern Red Cedar (Juniperus virginiana) is a small to medium-sized evergreen tree with scale-like leaves. It is commonly found in dry, rocky soils and is valued for its aromatic wood. The tree has a distinctive, conical shape and remains green year-round."
+    },
+    {
+        "name": "Hazelnut",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "oval",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "serrated",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "orange"],
+        "image": "hazelnut_tree.jpeg",
+        "description": "Hazelnut (Corylus americana) is a small to medium-sized shrub or tree known for its edible nuts. It has serrated, oval leaves that turn yellow or orange in autumn. Hazelnuts are often found in moist, well-drained soils and are valued for their nuts and ornamental qualities."
+    }, 
+    { 
+        "name": "Black Willow",
+        "leaf_type": "simple",
+        "leaf_number": "1",
+        "leaf_shape": "lanceolate",
+        "leaf_size": "medium",
+        "leaf_color": "green",
+        "leaf_edge": "smooth",
+        "venation": "pinnate",
+        "texture": "smooth",
+        "leaf_autum": ["yellow", "gold"],
+        "image": "black_willow.jpeg",
+        "description": "Black Willow (Salix nigra) is a medium-sized deciduous tree commonly found along streams, rivers, and wetlands. It has long, narrow, finely serrated leaves and dark, furrowed bark. Black Willow is known for its flexible branches and is often used for erosion control."
+    },
 ]

@@ -2,9 +2,90 @@
 <html>
 <head>
     <title>Tree Identifier</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            background-color: #c2e9e5;
+            margin: 10px;
+            padding: 20px;
+            color: #3442a6;
+            border: 2px solid #3442a6;
+        }
+        h1 {
+            color: #3442a6;
+        }
+        .tree-image {
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 3px solid #3442a6;
+            border-radius: 8px;
+            max-width: 300px;
+            max-height: 300px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 8px;
+            margin: 6px 0 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #3442a6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #222b6d;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h1>Tree Identifier</h1>
+    <h1>Virginia Tree Identifier</h1>
+    <!-- Show the selected tree image if available, otherwise show the default Dogwood image -->
+    {% if image %}
+        <img src="{{ url_for('static', filename=image) }}" alt="Tree Image" class="tree-image">
+        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;"></div>
+            <h3>{{ tree_name }}</h3>
+            <p>{{ description }}</p>
+        </div>
+    {% else %}
+        <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image">
+        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
+            <h3>Dogwood</h3>
+            <p>Commonly found in Virginia, known for its beautiful flowers.</p>
+        </div>
+    {% endif %}
+    
+    
+    <br>
+    <h2>Identify a Tree</h2>
+    <p>To identify a tree, please provide the following information about its leaves:</p>
     <form method="post">
         <label>Is the leaf simple or compound? (e.g., simple, compound):</label>
         <input name="leaf_type" value="{{ user_description.leaf_type }}"><br><br>
@@ -24,7 +105,7 @@
         <label>What is the leaf edge like? (e.g., smooth, serrated, deeply lobed):</label>
         <input name="leaf_edge" value="{{ user_description.leaf_edge }}"><br><br>
 
-        <label>What is the leaf venation? (e.g., pinnate, palmate):</label>
+        <label>What is the leaf venation? (e.g., pinnate, palmate, parallel):</label>
         <input name="venation" value="{{ user_description.venation }}"><br><br>
 
         <label>How is the texture of the leaf? (e.g., smooth, rough):</label>
@@ -65,8 +146,9 @@
         <h2>Description:</h2>
         <p>{{ description }}</p>
     {% endif %}
-<footer>
-    <p>Powered by Tree Identifier</p>
-</footer>
+
+    <footer>
+        <p>Powered by Tree Identifier</p>
+    </footer>
 </body>
 </html>

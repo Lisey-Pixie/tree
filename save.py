@@ -3,6 +3,9 @@ import re
 #import treeIdentifier.html as html
 # List of tree descriptions
 from trees_data import trees # type: ignore
+from flask import Flask, render_template, request
+
+app = Flask(__name__) 
 
 def get_valid_input(prompt, valid_options=None, input_type=str):
     while True:
@@ -84,9 +87,7 @@ def ask_leaf_attributes():
     }
 
 # Function to identify possible trees based on user input
-from flask import Flask, render_template, request
 
-app = Flask(__name__)
 
 # --- Place your 'trees' list and 'case_insensitive_match' function here ---
 
@@ -124,6 +125,8 @@ def identify_tree(user_description, trees):
 def home():
     matches = []
     description = None
+    image = None
+    tree_name= "Dogwood"
     user_description = {
         "leaf_type": "",
         "leaf_number": "",
@@ -153,7 +156,9 @@ def home():
             for tree in trees:
                 if tree["name"] == chosen:
                     description = tree.get("description", "No description available.")
-    return render_template('treeIdentifier.html', matches=matches, description=description, user_description=user_description)
+                    image = tree.get("image", None)
+                    tree_name = tree.get("name", "Unknown Tree")
+    return render_template('treeIdentifier.html', matches=matches, description=description, image=image, tree_name = tree_name, user_description=user_description)
 
 if __name__ == '__main__':
     app.run(debug=True)
