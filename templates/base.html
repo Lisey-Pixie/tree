@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>{% block title %}Tree Identifier{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         html, body {
             width: 100vw;
@@ -94,6 +95,33 @@
             margin-top: 40px;
             text-align: center;
         }
+    @media (max-width: 600px) {
+    body {
+        padding: 5px;
+        font-size: 1em;
+    }
+    .content-wrapper {
+        max-width: 100%;
+        padding: 2px;
+    }
+    nav > div {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    ul {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    li {
+        width: 95vw !important;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    img.tree-image {
+        max-width: 95vw;
+        height: auto;
+    }
+}    
     </style>
     {% block head %}{% endblock %}
 </head>

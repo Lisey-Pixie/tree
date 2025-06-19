@@ -1,95 +1,8 @@
-
 import re
-#import treeIdentifier.html as html
-# List of tree descriptions
-from trees_data import trees # type: ignore
+from trees_data import trees  # type: ignore
 from flask import Flask, render_template, request
 
-app = Flask(__name__) 
-
-def get_valid_input(prompt, valid_options=None, input_type=str):
-    while True:
-        user_input = input(prompt)
-        try:
-            # Case when the input is expected to be an integer
-            if input_type == int:
-                user_input = int(user_input)
-                if user_input <= 0:
-                    raise ValueError("Input must be a positive number.")
-            # Case when the input is expected to be a list (e.g., multiple numbers)
-            elif input_type == list:
-                user_input = [int(x.strip()) for x in user_input.split(',')]
-                if not all(x > 0 for x in user_input):
-                    raise ValueError("All numbers must be positive.")
-            # If valid_options is provided, make sure the input is in the valid options list
-            elif valid_options:
-                if isinstance(valid_options, list):
-                    if user_input not in valid_options:
-                        raise ValueError(f"Invalid input. Choose from {', '.join(valid_options)}.")
-                else:
-                    raise ValueError("Valid options should be a list.")
-            return user_input
-        except ValueError as ve:
-            print(f"Error: {ve}. Please try again.")
-
-def case_insensitive_match(user_value, tree_values):
-    # Ensure tree_values is always a list for iteration
-    if not isinstance(tree_values, list):
-        tree_values = [tree_values]  # Make it a list if it's a single value
-
-    # If user_value is a list, compare each value against tree_values
-    if isinstance(user_value, list):
-        for val in user_value:
-            if case_insensitive_match(val, tree_values):  # Recursively check individual values
-                return True
-    else:
-        # Check for string matching case-insensitively
-        for val in tree_values:
-            if isinstance(val, str) and str(user_value).strip().lower() == str(val).strip().lower():
-                return True
-    return False
-
-# Ask for user leaf attributes
-def ask_leaf_attributes():
-    t = get_valid_input("Is the leaf simple or compound? (e.g., simple, compound): ", ["simple", "compound"])
-
-    # leaf_number should accept multiple values (comma separated, like "3, 5, 7")
-    n = get_valid_input("How many leaflets, or needles in a cluster? (comma separated for multiple values, e.g., 5, 7, 9): ", input_type=list)
-
-    l = get_valid_input("How is the leaf shaped? (e.g., lobed, palmate, oval, elliptical, needles, diamond, lanceolate, ovate, heart-shaped): ", 
-                        ["lobed", "palmate", "oval", "elliptical", "needles", "diamond", "lanceolate", "ovate", "heart-shaped"], input_type=str)
-
-    s = get_valid_input("What is the size of the leaf? (e.g., small, medium, large): ", ["small", "medium", "large"], input_type=str)
-
-    c = get_valid_input("What is the leaf color? (e.g., green, yellow, brown, red, orange, purple, gold): ", 
-                        ["green", "yellow", "brown", "red", "orange", "purple", "gold"], input_type=str)
-
-    edge = get_valid_input("What is the leaf edge like? (e.g., smooth, serrated, deeply lobed): ", 
-                           ["smooth", "serrated", "deeply lobed", "toothed"], input_type=str)
-
-    v = get_valid_input("What is the leaf venation? (e.g., pinnate, palmate): ", ["pinnate", "palmate"], input_type=str)
-
-    texture = get_valid_input("How is the texture of the leaf? (e.g., smooth, rough): ", ["smooth", "rough"], input_type=str)
-
-    autumn_color = get_valid_input("What color does the leaf turn in autumn? (e.g., red, yellow, orange, copper, evergreen): ", 
-                                   ["red", "yellow", "orange", "copper", "evergreen"], input_type=str)
-
-    return {
-        "leaf_type": t,
-        "leaf_number": n,
-        "leaf_shape": l,
-        "leaf_size": s,
-        "leaf_color": c,
-        "leaf_edge": edge,
-        "venation": v,
-        "texture": texture,
-        "leaf_autum": autumn_color
-    }
-
-# Function to identify possible trees based on user input
-
-
-# --- Place your 'trees' list and 'case_insensitive_match' function here ---
+app = Flask(__name__)
 
 def case_insensitive_match(user_value, tree_values):
     if not isinstance(tree_values, list):
@@ -120,15 +33,18 @@ def identify_tree(user_description, trees):
             match_scores.append((tree['name'], score))
     match_scores.sort(key=lambda x: x[1], reverse=True)
     return match_scores
+
 @app.route('/')
 def index():
     return render_template('frontPage.html')
+
 @app.route('/treeIdentifier', methods=['GET', 'POST'])
 def treeIdentifier():
     matches = []
     description = None
     image = None
-    tree_name= "Dogwood"
+    tree_name = "Dogwood"
+    error = None
     user_description = {
         "leaf_type": "",
         "leaf_number": "",
@@ -152,18 +68,57 @@ def treeIdentifier():
             "texture": request.form.get("texture", ""),
             "leaf_autum": request.form.get("leaf_autum", ""),
         }
-        matches = identify_tree(user_description, trees)
-        if request.form.get("get_description") and request.form.get("tree_choice"):
-            chosen = request.form.get("tree_choice")
-            for tree in trees:
-                if tree["name"] == chosen:
-                    description = tree.get("description", "No description available.")
-                    image = tree.get("image", None)
-                    tree_name = tree.get("name", "Unknown Tree")
-    return render_template('treeIdentifier.html', matches=matches, description=description, image=image, tree_name = tree_name, user_description=user_description)
+        # --- Input validation ---
+        valid_leaf_types = ["simple", "compound"]
+        valid_leaf_shapes = ["lobed", "palmate", "oval", "elliptical", "needles", "diamond", "lanceolate", "ovate", "heart-shaped", "triangular"]
+        valid_leaf_sizes = ["small", "medium", "large"]
+        valid_leaf_colors = ["green", "yellow", "brown", "red", "orange", "purple", "gold"]
+        valid_leaf_edges = ["smooth", "serrated", "deeply lobed", "lobed", "sharp"]
+        valid_venations = ["pinnate", "palmate", "parallel"]
+        valid_textures = ["smooth", "rough"]
+        valid_leaf_autums = ["red", "yellow", "orange", "copper", "brown", "purple", "gold", "evergreen"]
+
+        if not user_description["leaf_type"] or user_description["leaf_type"] not in valid_leaf_types:
+            error = "Please select 'simple' or 'compound' for leaf type."
+        elif not user_description["leaf_shape"] or user_description["leaf_shape"] not in valid_leaf_shapes:
+            error = "Please select a valid leaf shape."
+        elif not user_description["leaf_size"] or user_description["leaf_size"] not in valid_leaf_sizes:
+            error = "Please select a valid leaf size."
+        elif not user_description["leaf_color"] or user_description["leaf_color"] not in valid_leaf_colors:
+            error = "Please select a valid leaf color."
+        elif not user_description["leaf_edge"] or user_description["leaf_edge"] not in valid_leaf_edges:
+            error = "Please select a valid leaf edge."
+        elif not user_description["venation"] or user_description["venation"] not in valid_venations:
+            error = "Please select a valid leaf venation."
+        elif not user_description["texture"] or user_description["texture"] not in valid_textures:
+            error = "Please select a valid leaf texture."
+        elif not user_description["leaf_autum"] or user_description["leaf_autum"] not in valid_leaf_autums:
+            error = "Please select a valid autumn color."
+        elif not user_description["leaf_number"] or not re.match(r'^\d+(,\s*\d+)*$', user_description["leaf_number"]):
+            error = "Please enter a valid number or comma-separated numbers for leaflets or needles."
+        else:
+            matches = identify_tree(user_description, trees)
+            if request.form.get("get_description") and request.form.get("tree_choice"):
+                chosen = request.form.get("tree_choice")
+                for tree in trees:
+                    if tree["name"] == chosen:
+                        description = tree.get("description", "No description available.")
+                        image = tree.get("image", None)
+                        tree_name = tree.get("name", "Unknown Tree")
+    return render_template(
+        'treeIdentifier.html',
+        matches=matches,
+        description=description,
+        image=image,
+        tree_name=tree_name,
+        user_description=user_description,
+        error=error
+    )
+
 @app.route('/browse')
 def browse():
     return render_template('browse.html', trees=trees)
+
 @app.route('/tree/<name>')
 def tree_data(name):
     tree = next((t for t in trees if t['name'].lower() == name.lower()), None)
@@ -171,6 +126,6 @@ def tree_data(name):
         return render_template('tree_data.html', tree=tree)
     else:
         return "Tree not found", 404
-    
+
 if __name__ == '__main__':
     app.run(debug=True)

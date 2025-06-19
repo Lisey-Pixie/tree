@@ -1,13 +1,61 @@
+  
 <!DOCTYPE html>
 <html>
 {% extends "base.html" %}
-{% block title %}{{ tree.name }}{% endblock %}
+{% block title %}{{ tree.name }} Details{% endblock %}
 {% block content %}
     <h1>{{ tree.name }}</h1>
     <img src="{{ url_for('static', filename=tree.image) }}" alt="{{ tree.name }}" class="tree-image">
+    <ul style="list-style: none; padding: 0; text-align: left; max-width: 400px; margin: 20px auto;">
+        <li><strong>Leaf Type:</strong> {{ tree.leaf_type }}</li>
+        <li><strong>Leaf Number:</strong> 
+            {% if tree.leaf_number is iterable and tree.leaf_number is not string %}
+                {{ ', '.join(tree.leaf_number) }}
+            {% else %}
+                {{ tree.leaf_number }}
+            {% endif %}
+        </li>
+        <li><strong>Leaf Shape:</strong> 
+            {% if tree.leaf_shape is iterable and tree.leaf_shape is not string %}
+                {{ ', '.join(tree.leaf_shape) }}
+            {% else %}
+                {{ tree.leaf_shape }}
+            {% endif %}
+        </li>
+        <li><strong>Leaf Size:</strong> 
+            {% if tree.leaf_size is iterable and tree.leaf_size is not string %}
+                {{ ', '.join(tree.leaf_size) }}
+            {% else %}
+                {{ tree.leaf_size }}
+            {% endif %}
+        </li>
+        <li><strong>Leaf Color:</strong> 
+            {% if tree.leaf_color is iterable and tree.leaf_color is not string %}
+                {{ ', '.join(tree.leaf_color) }}
+            {% else %}
+                {{ tree.leaf_color }}
+            {% endif %}
+        </li>
+        <li><strong>Leaf Edge:</strong> 
+            {% if tree.leaf_edge is iterable and tree.leaf_edge is not string %}
+                {{ ', '.join(tree.leaf_edge) }}
+            {% else %}
+                {{ tree.leaf_edge }}
+            {% endif %}
+        </li>
+        <li><strong>Venation:</strong> {{ tree.venation }}</li>
+        <li><strong>Texture:</strong> {{ tree.texture }}</li>
+        <li><strong>Autumn Color:</strong> 
+            {% if tree.leaf_autum is iterable and tree.leaf_autum is not string %}
+                {{ ', '.join(tree.leaf_autum) }}
+            {% else %}
+                {{ tree.leaf_autum }}
+            {% endif %}
+        </li>
+    </ul>
     <p style="max-width: 600px; margin: 20px auto;">{{ tree.description }}</p>
     <a href="{{ url_for('browse') }}">
         <button type="button">Back to Browse</button>
     </a>
 {% endblock %}
-</html>    
+</html>
