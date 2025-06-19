@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Tree Identifier{% endblock %}</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            background-color: #c2e9e5;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            margin-left: 1px;
+            margin-right: 1px;
+            padding: 20px;
+            color: #3442a6;
+            border: 2px solid #3442a6;
+            text-align: center;
+        }
+        .content-wrapper {
+            border: 2px solid #c2e9e5;
+            padding: 5px;
+            background: #c2e9e5;
+            border-radius: 5px;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 2px 8px #c2e9e5;
+        }
+        h1 {
+            color: #3442a6;
+        }
+        .tree-image {
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 3px solid #3442a6;
+            border-radius: 8px;
+            max-width: 300px;
+            max-height: 300px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 8px;
+            margin: 6px 0 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #3442a6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #222b6d;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+        }
+        .start-btn {
+            display: block;
+            margin: 40px auto 0 auto;
+            background: #3442a6;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <nav style="background: #3442a6; padding: 10px 0; margin-bottom: 30px;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 30px;">
+            <a href="{{ url_for('index') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Home</a>
+            <a href="{{ url_for('treeIdentifier') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Identify</a>
+            <a href="{{ url_for('browse') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Browse</a>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

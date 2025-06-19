@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Virginia Tree Identifier</title>
+</head>
+{% extends "base.html" %}
+{% block title %}Tree Identifier{% endblock %}
+{% block content %}
+    <h1>Welcome to the Virginia Tree Identifier</h1>
+    <p>
+        Discover and identify trees native to Virginia!<br>
+        Click below to get started.
+    </p>
+    <a href="{{ url_for('treeIdentifier') }}">
+        <button class="start-btn">Start Identifying</button>
+    </a>
+{% endblock %}
+
+</html>

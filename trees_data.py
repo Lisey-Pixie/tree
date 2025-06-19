@@ -11,7 +11,7 @@ trees = [
         "texture": "rough",
         "leaf_autum": ["red","brown"],
         "description": "White Oak (Quercus alba) is a large, long-lived hardwood tree with deeply lobed leaves and a strong, straight trunk. It grows in a variety of habitats and its leaves turn red or brown in autumn. The wood is highly valued for furniture and flooring.",
-        "image": "oak_tree.jpeg"
+        "image": "white_oak.jpeg"
     },
     {
         "name": "Red Oak",
@@ -25,7 +25,7 @@ trees = [
         "texture": "rough",
         "leaf_autum": ["red"],
         "description": "Red Oak (Quercus rubra) is a fast-growing hardwood tree with pointed, sharply lobed leaves. It's commonly found in upland forests and turns bright red in fall. Its wood is used in construction and cabinetry.",
-        "image": "oak_tree.jpeg"
+        "image": "red_oak.jpeg"
     },
     {
         "name": "Red Maple",
@@ -153,7 +153,6 @@ trees = [
         "image": "black_walnut.jpeg",
         "description": "Black Walnut (Juglans nigra) is known for its high-quality dark wood and large edible nuts. It has compound leaves and rough bark. Found in rich, moist soils, it’s valued for both wildlife and commercial use."
     },
-
     {
         "name": "American Sycamore",
         "leaf_type": "simple",

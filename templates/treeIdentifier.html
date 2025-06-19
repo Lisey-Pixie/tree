@@ -2,70 +2,10 @@
 <html>
 <head>
     <title>Tree Identifier</title>
-    <style>
-        body {
-            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
-            background-color: #c2e9e5;
-            margin: 10px;
-            padding: 20px;
-            color: #3442a6;
-            border: 2px solid #3442a6;
-        }
-        h1 {
-            color: #3442a6;
-        }
-        .tree-image {
-            display: block;
-            margin: 0 auto 20px auto;
-            border: 3px solid #3442a6;
-            border-radius: 8px;
-            max-width: 300px;
-            max-height: 300px;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"] {
-            width: 95%;
-            padding: 8px;
-            margin: 6px 0 12px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            background: #3442a6;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background: #222b6d;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #888;
-        }
-    </style>
 </head>
-<body>
+{% extends "base.html" %}
+{% block title %}Tree Identifier{% endblock %}
+{% block content %}
     <h1>Virginia Tree Identifier</h1>
     <!-- Show the selected tree image if available, otherwise show the default Dogwood image -->
     {% if image %}
@@ -115,6 +55,9 @@
         <input name="leaf_autum" value="{{ user_description.leaf_autum }}"><br><br>
 
         <input type="submit" value="Identify">
+        <a href="/" style="margin-left:10px;">
+            <button type="button">Reset</button>
+        </a>
     </form>
 
     {% if matches %}
@@ -146,9 +89,11 @@
         <h2>Description:</h2>
         <p>{{ description }}</p>
     {% endif %}
-
+    <a href="{{ url_for('index') }}">
+        <button type="button">Back to Home</button>
+    <br>
     <footer>
         <p>Powered by Tree Identifier</p>
     </footer>
-</body>
+{% endblock %}
 </html>

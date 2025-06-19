@@ -120,9 +120,11 @@ def identify_tree(user_description, trees):
             match_scores.append((tree['name'], score))
     match_scores.sort(key=lambda x: x[1], reverse=True)
     return match_scores
-
-@app.route('/', methods=['GET', 'POST'])
-def home():
+@app.route('/')
+def index():
+    return render_template('frontPage.html')
+@app.route('/treeIdentifier', methods=['GET', 'POST'])
+def treeIdentifier():
     matches = []
     description = None
     image = None
@@ -159,6 +161,16 @@ def home():
                     image = tree.get("image", None)
                     tree_name = tree.get("name", "Unknown Tree")
     return render_template('treeIdentifier.html', matches=matches, description=description, image=image, tree_name = tree_name, user_description=user_description)
-
+@app.route('/browse')
+def browse():
+    return render_template('browse.html', trees=trees)
+@app.route('/tree/<name>')
+def tree_data(name):
+    tree = next((t for t in trees if t['name'].lower() == name.lower()), None)
+    if tree:
+        return render_template('tree_data.html', tree=tree)
+    else:
+        return "Tree not found", 404
+    
 if __name__ == '__main__':
     app.run(debug=True)
