@@ -7,11 +7,15 @@
 {% block title %}Tree Identifier{% endblock %}
 {% block content %}
     <h1>Welcome to the Virginia Tree Identifier</h1>
-    <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image">
-        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
-            <h3>Dogwood</h3>
-            <p>The Dogwood (Cornus spp.) is the Virginia state tree known for its showy flowers and distinctive bark.</p>
-        </div>
+    <div class = "tree-image-row">
+        <img src="{{ url_for('static', filename='cherry_tree.jpeg') }}" alt="Cherry tree" class="tree-image no-border">
+        <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image no-border">
+        <img src="{{ url_for('static', filename='cherry_tree.jpeg') }}" alt="Cherry tree" class="tree-image no-border" style="transform: scaleX(-1);">
+    </div>
+    <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;" >
+                <h3>Dogwood</h3>
+                <p>The Dogwood (Cornus spp.) is the Virginia state tree known for its showy flowers and distinctive bark.</p>
+    </div>
     <p>
         Discover and identify trees native to Virginia!<br>
         Click below to get started.

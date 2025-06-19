@@ -14,14 +14,34 @@
             <p>{{ description }}</p>
         </div>
     {% else %}
-        <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image">
-        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
-            <h3>Dogwood</h3>
-            <p>The Dogwood tree is known for its flowers and distinctive bark.</p>
-        </div>
+       
     {% endif %}
 
     <br>
+        {% if matches %}
+        <h2>Top 3 Possible Matches:</h2>
+        <form method="post">
+            <input type="hidden" name="leaf_type" value="{{ user_description.leaf_type }}">
+            <input type="hidden" name="leaf_number" value="{{ user_description.leaf_number }}">
+            <input type="hidden" name="leaf_shape" value="{{ user_description.leaf_shape }}">
+            <input type="hidden" name="leaf_size" value="{{ user_description.leaf_size }}">
+            <input type="hidden" name="leaf_color" value="{{ user_description.leaf_color }}">
+            <input type="hidden" name="leaf_edge" value="{{ user_description.leaf_edge }}">
+            <input type="hidden" name="venation" value="{{ user_description.venation }}">
+            <input type="hidden" name="texture" value="{{ user_description.texture }}">
+            <input type="hidden" name="leaf_autum" value="{{ user_description.leaf_autum }}">
+            <ul>
+            {% for name, score in matches[:3] %}
+                <li>
+                    <input type="radio" name="tree_choice" value="{{ name }}" id="{{ name }}">
+                    <label for="{{ name }}">{{ name }} (score: {{ score }})</label>
+                </li>
+            {% endfor %}
+            </ul>
+            <input type="submit" name="get_description" value="Get Description">
+        </form>
+    {% endif %}
+
     <h2>Identify a Tree</h2>
     <p>To identify a tree, please provide the following information about its leaves:</p>
     <form method="post">
@@ -109,34 +129,10 @@
         </select><br><br>
 
         <input type="submit" value="Identify">
-        <a href="/" style="margin-left:10px;">
-            <button type="button">Reset</button>
-        </a>
+        <button type="button" onclick="window.location.href=window.location.pathname" style="margin-left:10px;">Reset</button>
     </form>
 
-    {% if matches %}
-        <h2>Top 3 Possible Matches:</h2>
-        <form method="post">
-            <input type="hidden" name="leaf_type" value="{{ user_description.leaf_type }}">
-            <input type="hidden" name="leaf_number" value="{{ user_description.leaf_number }}">
-            <input type="hidden" name="leaf_shape" value="{{ user_description.leaf_shape }}">
-            <input type="hidden" name="leaf_size" value="{{ user_description.leaf_size }}">
-            <input type="hidden" name="leaf_color" value="{{ user_description.leaf_color }}">
-            <input type="hidden" name="leaf_edge" value="{{ user_description.leaf_edge }}">
-            <input type="hidden" name="venation" value="{{ user_description.venation }}">
-            <input type="hidden" name="texture" value="{{ user_description.texture }}">
-            <input type="hidden" name="leaf_autum" value="{{ user_description.leaf_autum }}">
-            <ul>
-            {% for name, score in matches[:3] %}
-                <li>
-                    <input type="radio" name="tree_choice" value="{{ name }}" id="{{ name }}">
-                    <label for="{{ name }}">{{ name }} (score: {{ score }})</label>
-                </li>
-            {% endfor %}
-            </ul>
-            <input type="submit" name="get_description" value="Get Description">
-        </form>
-    {% endif %}
+
 
     {% if description %}
         <h2>Description:</h2>
@@ -145,9 +141,24 @@
     <a href="{{ url_for('index') }}">
         <button type="button">Back to Home</button>
     </a>
+    {% if session.identified_trees %}
+    <h2>Trees You Have Identified:</h2>
+    <ul>
+        {% for tname in session.identified_trees %}
+            <li>
+                <a href="{{ url_for('tree_data', name=tname) }}">{{ tname }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <br>
     <footer>
         <p>Powered by Tree Identifier</p>
     </footer>
 {% endblock %}
+
+
+<form method="post" action="{{ url_for('clear_identified') }}">
+    <button type="submit">Clear Identified Trees</button>
+</form>
 </html>

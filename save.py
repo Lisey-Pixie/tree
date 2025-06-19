@@ -1,8 +1,8 @@
 import re
 from trees_data import trees  # type: ignore
-from flask import Flask, render_template, request
-
+from flask import Flask, render_template, request, session, redirect, url_for
 app = Flask(__name__)
+app.secret_key = 'cYaL83303mF'
 
 def case_insensitive_match(user_value, tree_values):
     if not isinstance(tree_values, list):
@@ -105,6 +105,12 @@ def treeIdentifier():
                         description = tree.get("description", "No description available.")
                         image = tree.get("image", None)
                         tree_name = tree.get("name", "Unknown Tree")
+                        # --- Add to identified trees in session ---
+                        if "identified_trees" not in session:
+                            session["identified_trees"] = []
+                        if chosen not in session["identified_trees"]:
+                            session["identified_trees"].append(chosen)
+                        session.modified = True
     return render_template(
         'treeIdentifier.html',
         matches=matches,
@@ -126,6 +132,10 @@ def tree_data(name):
         return render_template('tree_data.html', tree=tree)
     else:
         return "Tree not found", 404
+@app.route('/clear_identified', methods=['POST'])
+def clear_identified():
+    session.pop('identified_trees', None)
+    return redirect(url_for('treeIdentifier'))
 
 if __name__ == '__main__':
     app.run(debug=True)
