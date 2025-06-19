@@ -7,10 +7,9 @@
 {% block title %}Tree Identifier{% endblock %}
 {% block content %}
     <h1>Virginia Tree Identifier</h1>
-    <!-- Show the selected tree image if available, otherwise show the default Dogwood image -->
     {% if image %}
         <img src="{{ url_for('static', filename=image) }}" alt="Tree Image" class="tree-image">
-        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;"></div>
+        <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
             <h3>{{ tree_name }}</h3>
             <p>{{ description }}</p>
         </div>
@@ -18,41 +17,96 @@
         <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image">
         <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
             <h3>Dogwood</h3>
-            <p>Commonly found in Virginia, known for its beautiful flowers.</p>
+            <p>The Dogwood tree is known for its flowers and distinctive bark.</p>
         </div>
     {% endif %}
-    
-    
+
     <br>
     <h2>Identify a Tree</h2>
     <p>To identify a tree, please provide the following information about its leaves:</p>
     <form method="post">
-        <label>Is the leaf simple or compound? (e.g., simple, compound):</label>
-        <input name="leaf_type" value="{{ user_description.leaf_type }}"><br><br>
+        <label>Is the leaf simple or compound?</label>
+        <select name="leaf_type">
+            <option value="">Select...</option>
+            <option value="simple" {% if user_description.leaf_type == 'simple' %}selected{% endif %}>Simple</option>
+            <option value="compound" {% if user_description.leaf_type == 'compound' %}selected{% endif %}>Compound</option>
+        </select><br><br>
 
         <label>How many leaflets, or needles in a cluster? (comma separated for multiple values, e.g., 5, 7, 9):</label>
         <input name="leaf_number" value="{{ user_description.leaf_number }}"><br><br>
 
-        <label>How is the leaf shaped? (e.g., lobed, palmate, oval, elliptical, needles, diamond, lanceolate, ovate, heart-shaped):</label>
-        <input name="leaf_shape" value="{{ user_description.leaf_shape }}"><br><br>
+        <label>How is the leaf shaped?</label>
+        <select name="leaf_shape">
+            <option value="">Select...</option>
+            <option value="lobed" {% if user_description.leaf_shape == 'lobed' %}selected{% endif %}>Lobed</option>
+            <option value="palmate" {% if user_description.leaf_shape == 'palmate' %}selected{% endif %}>Palmate</option>
+            <option value="oval" {% if user_description.leaf_shape == 'oval' %}selected{% endif %}>Oval</option>
+            <option value="elliptical" {% if user_description.leaf_shape == 'elliptical' %}selected{% endif %}>Elliptical</option>
+            <option value="needles" {% if user_description.leaf_shape == 'needles' %}selected{% endif %}>Needles</option>
+            <option value="diamond" {% if user_description.leaf_shape == 'diamond' %}selected{% endif %}>Diamond</option>
+            <option value="lanceolate" {% if user_description.leaf_shape == 'lanceolate' %}selected{% endif %}>Lanceolate</option>
+            <option value="ovate" {% if user_description.leaf_shape == 'ovate' %}selected{% endif %}>Ovate</option>
+            <option value="heart-shaped" {% if user_description.leaf_shape == 'heart-shaped' %}selected{% endif %}>Heart-shaped</option>
+            <option value="triangular" {% if user_description.leaf_shape == 'triangular' %}selected{% endif %}>Triangular</option>
+        </select><br><br>
 
-        <label>What is the size of the leaf? (e.g., small, medium, large):</label>
-        <input name="leaf_size" value="{{ user_description.leaf_size }}"><br><br>
+        <label>What is the size of the leaf?</label>
+        <select name="leaf_size">
+            <option value="">Select...</option>
+            <option value="small" {% if user_description.leaf_size == 'small' %}selected{% endif %}>Small</option>
+            <option value="medium" {% if user_description.leaf_size == 'medium' %}selected{% endif %}>Medium</option>
+            <option value="large" {% if user_description.leaf_size == 'large' %}selected{% endif %}>Large</option>
+        </select><br><br>
 
-        <label>What is the leaf color? (e.g., green, yellow, brown, red, orange, purple, gold):</label>
-        <input name="leaf_color" value="{{ user_description.leaf_color }}"><br><br>
+        <label>What is the leaf color?</label>
+        <select name="leaf_color">
+            <option value="">Select...</option>
+            <option value="green" {% if user_description.leaf_color == 'green' %}selected{% endif %}>Green</option>
+            <option value="yellow" {% if user_description.leaf_color == 'yellow' %}selected{% endif %}>Yellow</option>
+            <option value="brown" {% if user_description.leaf_color == 'brown' %}selected{% endif %}>Brown</option>
+            <option value="red" {% if user_description.leaf_color == 'red' %}selected{% endif %}>Red</option>
+            <option value="orange" {% if user_description.leaf_color == 'orange' %}selected{% endif %}>Orange</option>
+            <option value="purple" {% if user_description.leaf_color == 'purple' %}selected{% endif %}>Purple</option>
+            <option value="gold" {% if user_description.leaf_color == 'gold' %}selected{% endif %}>Gold</option>
+        </select><br><br>
 
-        <label>What is the leaf edge like? (e.g., smooth, serrated, deeply lobed):</label>
-        <input name="leaf_edge" value="{{ user_description.leaf_edge }}"><br><br>
+        <label>What is the leaf edge like?</label>
+        <select name="leaf_edge">
+            <option value="">Select...</option>
+            <option value="smooth" {% if user_description.leaf_edge == 'smooth' %}selected{% endif %}>Smooth</option>
+            <option value="serrated" {% if user_description.leaf_edge == 'serrated' %}selected{% endif %}>Serrated</option>
+            <option value="deeply lobed" {% if user_description.leaf_edge == 'deeply lobed' %}selected{% endif %}>Deeply Lobed</option>
+            <option value="lobed" {% if user_description.leaf_edge == 'lobed' %}selected{% endif %}>Lobed</option>
+            <option value="sharp" {% if user_description.leaf_edge == 'sharp' %}selected{% endif %}>Sharp</option>
+        </select><br><br>
 
-        <label>What is the leaf venation? (e.g., pinnate, palmate, parallel):</label>
-        <input name="venation" value="{{ user_description.venation }}"><br><br>
+        <label>What is the leaf venation?</label>
+        <select name="venation">
+            <option value="">Select...</option>
+            <option value="pinnate" {% if user_description.venation == 'pinnate' %}selected{% endif %}>Pinnate</option>
+            <option value="palmate" {% if user_description.venation == 'palmate' %}selected{% endif %}>Palmate</option>
+            <option value="parallel" {% if user_description.venation == 'parallel' %}selected{% endif %}>Parallel</option>
+        </select><br><br>
 
-        <label>How is the texture of the leaf? (e.g., smooth, rough):</label>
-        <input name="texture" value="{{ user_description.texture }}"><br><br>
+        <label>How is the texture of the leaf?</label>
+        <select name="texture">
+            <option value="">Select...</option>
+            <option value="smooth" {% if user_description.texture == 'smooth' %}selected{% endif %}>Smooth</option>
+            <option value="rough" {% if user_description.texture == 'rough' %}selected{% endif %}>Rough</option>
+        </select><br><br>
 
-        <label>What color does the leaf turn in autumn? (e.g., red, yellow, orange, copper, evergreen):</label>
-        <input name="leaf_autum" value="{{ user_description.leaf_autum }}"><br><br>
+        <label>What color does the leaf turn in autumn?</label>
+        <select name="leaf_autum">
+            <option value="">Select...</option>
+            <option value="red" {% if user_description.leaf_autum == 'red' %}selected{% endif %}>Red</option>
+            <option value="yellow" {% if user_description.leaf_autum == 'yellow' %}selected{% endif %}>Yellow</option>
+            <option value="orange" {% if user_description.leaf_autum == 'orange' %}selected{% endif %}>Orange</option>
+            <option value="copper" {% if user_description.leaf_autum == 'copper' %}selected{% endif %}>Copper</option>
+            <option value="brown" {% if user_description.leaf_autum == 'brown' %}selected{% endif %}>Brown</option>
+            <option value="purple" {% if user_description.leaf_autum == 'purple' %}selected{% endif %}>Purple</option>
+            <option value="gold" {% if user_description.leaf_autum == 'gold' %}selected{% endif %}>Gold</option>
+            <option value="evergreen" {% if user_description.leaf_autum == 'evergreen' %}selected{% endif %}>Evergreen</option>
+        </select><br><br>
 
         <input type="submit" value="Identify">
         <a href="/" style="margin-left:10px;">
@@ -63,7 +117,6 @@
     {% if matches %}
         <h2>Top 3 Possible Matches:</h2>
         <form method="post">
-            <!-- Preserve user input as hidden fields -->
             <input type="hidden" name="leaf_type" value="{{ user_description.leaf_type }}">
             <input type="hidden" name="leaf_number" value="{{ user_description.leaf_number }}">
             <input type="hidden" name="leaf_shape" value="{{ user_description.leaf_shape }}">
@@ -91,6 +144,7 @@
     {% endif %}
     <a href="{{ url_for('index') }}">
         <button type="button">Back to Home</button>
+    </a>
     <br>
     <footer>
         <p>Powered by Tree Identifier</p>

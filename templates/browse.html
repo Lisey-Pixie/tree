@@ -7,12 +7,19 @@
     <ul style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; list-style: none; padding: 0;">
         {% for tree in trees %}
         <li style="width: 200px; text-align: center; background: #f8f8f8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 10px;">
-            <a href="{{ url_for('tree_data', name=tree.name) }}" style="text-decoration: none; color: #3442a6;">
-                <img src="{{ url_for('static', filename=tree.image) }}" alt="{{ tree.name }}" style="width: 100%; max-width: 180px; border-radius: 6px;">
-                <div style="margin-top: 10px; font-weight: bold;">{{ tree.name }}</div>
-            </a>
-        </li>
+    <a href="{{ url_for('tree_data', name=tree.name) }}" style="text-decoration: none; color: #3442a6;">
+        <div style="width: 180px; height: 180px; margin: 0 auto;">
+            <img src="{{ url_for('static', filename=tree.image) }}" alt="{{ tree.name }}"
+                 style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+        </div>
+        <div style="margin-top: 10px; font-weight: bold;">{{ tree.name }}</div>
+    </a>
+</li>
+        
         {% endfor %}
     </ul>
+    <footer>
+        <p>Powered by Tree Identifier</p>
+    </footer>
 {% endblock %}
 </html>
