@@ -208,6 +208,7 @@ def search():
             results = [tree for tree in trees if query in tree['name'].lower()]
     return render_template('search.html', results=results, query=query)
 
+
 # --- Run the Flask app in debug mode if this file is executed directly ---
 if __name__ == '__main__':
     app.run(debug=True)
