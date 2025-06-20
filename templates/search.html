@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    {% extends "base.html" %}
+{% block title %}Search Trees{% endblock %}
+
+{% block content %}
+    <h1>Search for a Tree</h1>
+    <form method="post" style="margin-bottom:20px;">
+        <input type="text" name="query" value="{{ query }}" placeholder="Enter tree name..." style="padding:8px; width:250px;">
+        <input type="submit" value="Search">
+    </form>
+    {% if query and not results %}
+        <p>No trees found matching "{{ query }}".</p>
+    {% endif %}
+    {% if results %}
+        <ul style="list-style:none; padding:0;">
+            {% for tree in results %}
+                <li style="margin-bottom:15px;">
+                    <a href="{{ url_for('tree_data', name=tree.name) }}">
+                        <strong>{{ tree.name }}</strong>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+    <p>
+        <a href="{{ url_for('index') }}"><button type="button">Back to Home</button></a>
+    </p>
+    <footer>
+        <p>Powered by Tree Identifier</p>
+    </footer>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    {% extends "base.html" %}
+{% block title %}Tree Checklist{% endblock %}
+
+{% block content %}
+    <h1>Virginia Tree Checklist</h1>
+    <form method="post" id="treelist-form">
+        <ul style="text-align:left; max-width:500px; margin:0 auto;">
+            {% for tree in trees %}
+                <li>
+                    <input type="checkbox" id="tree_{{ loop.index }}" name="checked_trees" value="{{ tree.name }}"
+                        {% if tree.name in checked_trees %}checked{% endif %} 
+                        onchange="toggleItalic(this)">
+                    <label for="tree_{{ loop.index }}"
+                        {% if tree.name in checked_trees %}class="italicized"{% endif %}>
+                        {{ tree.name }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Save Treelist">
+        <button type="submit" name="clear" value="1" style="margin-left:10px;"
+            onclick="return confirm('Are you sure you want to clear your treelist?');">
+            Clear Checklist
+        </button>
+    </form>
+    <p style="margin-top:20px;">
+        <a href="{{ url_for('index') }}"><button type="button">Back to Home</button></a>
+    </p>
+
+    <!-- JavaScript to toggle italics on check/uncheck -->
+    <script>
+        function toggleItalic(checkbox) {
+            var label = document.querySelector('label[for="' + checkbox.id + '"]');
+            if (checkbox.checked) {
+                label.classList.add('italicized');
+            } else {
+                label.classList.remove('italicized');
+            }
+        }
+    </script>
+{% endblock %}
+</html>

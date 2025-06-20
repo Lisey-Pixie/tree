@@ -131,6 +131,9 @@
             box-shadow: none !important;
             display: inline;
         }
+        .italicized {
+            font-style: italic;
+        }
         /* Responsive design: adjust layout for screens 600px wide or less */
         @media (max-width: 600px) {
             body {
@@ -170,7 +173,9 @@
         <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 30px;">
             <a href="{{ url_for('index') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Home</a>
             <a href="{{ url_for('treeIdentifier') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Identify</a>
+            <a href="{{ url_for('treelist') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Treelist</a>
             <a href="{{ url_for('browse') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Browse</a>
+            <a href="{{ url_for('search') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Search</a>
         </div>
     </nav>
     <!-- Main content area; child templates fill this block -->

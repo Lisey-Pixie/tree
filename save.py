@@ -180,6 +180,34 @@ def clear_identified():
     session.pop('identified_trees', None)
     return redirect(url_for('treeIdentifier'))
 
+@app.route('/treelist', methods=['GET', 'POST'])
+def treelist():
+    # Initialize the treelist in the session if not present
+    if 'checked_trees' not in session:
+        session['checked_trees'] = []
+
+    # If the form is submitted, update the session with checked trees
+    if request.method == 'POST':
+        checked = request.form.getlist('checked_trees')
+        session['checked_trees'] = checked
+        session.modified = True
+
+    return render_template('treelist.html', trees=trees, checked_trees=session.get('checked_trees', []))
+@app.route('/clear_treelist', methods=['POST'])
+def clear_treelist():
+    session.pop('checked_trees', None)
+    return redirect(url_for('treelist'))
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    results = []
+    query = ""
+    if request.method == 'POST':
+        query = request.form.get('query', '').strip().lower()
+        if query:
+            # Search by name (case-insensitive, partial match)
+            results = [tree for tree in trees if query in tree['name'].lower()]
+    return render_template('search.html', results=results, query=query)
+
 # --- Run the Flask app in debug mode if this file is executed directly ---
 if __name__ == '__main__':
     app.run(debug=True)
