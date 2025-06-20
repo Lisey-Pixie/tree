@@ -209,6 +209,42 @@ def search():
     return render_template('search.html', results=results, query=query)
 
 
+@app.route('/glossary')
+def glossary():
+    glossary_terms = [
+        {"term": "Alternate", "definition": "Leaves arranged singly at different heights along the stem."},
+        {"term": "Blade", "definition": "The broad, flat part of a leaf."},
+        {"term": "Broadleaf", "definition": "A tree with wide, flat leaves rather than needles."},
+        {"term": "Compound", "definition": "A leaf made up of two or more leaflets."},
+        {"term": "Conifer", "definition": "A tree that produces cones and needle-like or scale-like leaves, usually evergreen."},
+        {"term": "Deciduous", "definition": "A plant that sheds its leaves annually."},
+        {"term": "Elliptical", "definition": "Shaped like an elongated oval."},
+        {"term": "Evergreen", "definition": "A plant that retains green leaves throughout the year."},
+        {"term": "Glabrous", "definition": "A surface that is smooth and hairless."},
+        {"term": "Heart-shaped", "definition": "Shaped like a heart; often used to describe certain leaf bases."},
+        {"term": "Lanceolate", "definition": "Shaped like a lance tip; longer than wide, widest below the middle."},
+        {"term": "Lobed", "definition": "A leaf with large, rounded or pointed projections."},
+        {"term": "Margin", "definition": "The edge of a leaf, which can be smooth, serrated, lobed, or otherwise shaped."},
+        {"term": "Midrib", "definition": "The central vein running down the middle of a leaf."},
+        {"term": "Needles", "definition": "Long, thin leaves typical of pines and other conifers."},
+        {"term": "Node", "definition": "The part of a plant stem from which leaves or branches grow."},
+        {"term": "Opposite", "definition": "Leaves paired at the same level on opposite sides of the stem."},
+        {"term": "Ovate", "definition": "Egg-shaped; broadest below the middle."},
+        {"term": "Palmate", "definition": "A leaf shaped like an open hand with lobes or leaflets radiating from a single point."},
+        {"term": "Parallel (venation)", "definition": "Veins run parallel to each other, typical of grasses and some conifers."},
+        {"term": "Petiole", "definition": "The stalk that attaches a leaf blade to the stem."},
+        {"term": "Pinnate", "definition": "A leaf with smaller leaflets arranged on each side of a common axis."},
+        {"term": "Pubescent", "definition": "Covered with fine, short hairs."},
+        {"term": "Serrated", "definition": "A leaf edge with tooth-like projections."},
+        {"term": "Simple", "definition": "A leaf with a single, undivided blade."},
+        {"term": "Sinus", "definition": "The space or indentation between two lobes of a leaf."},
+        {"term": "Smooth (edge)", "definition": "A leaf edge that is even and unbroken, without teeth or lobes."},
+        {"term": "Texture", "definition": "The feel or appearance of a leaf surface (e.g., smooth, rough)."},
+        {"term": "Venation", "definition": "The pattern of veins in a leaf."},
+        {"term": "Whorled", "definition": "Three or more leaves growing from a single node on the stem."},
+    ]
+    return render_template('glossary.html', glossary_terms=glossary_terms)
+
 # --- Run the Flask app in debug mode if this file is executed directly ---
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends "base.html" %}
+{% block title %}Glossary{% endblock %}
+
+{% block content %}
+<h1>Glossary of Tree Terms</h1>
+<ul>
+    {% for item in glossary_terms %}
+        <li>
+            <strong>{{ item.term }}</strong>: {{ item.definition }}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('index') }}"><button type="button">Back to Home</button></a>
+{% endblock %}
+</html>
