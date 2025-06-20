@@ -150,6 +150,9 @@
             </li>
         {% endfor %}
     </ul>
+    <form method="post" action="{{ url_for('clear_identified') }}" class="inline-form">
+        <button type="submit">Clear Identified Trees</button>
+    </form>
     {% endif %}
     <br>
     <footer>
@@ -157,8 +160,4 @@
     </footer>
 {% endblock %}
 
-
-<form method="post" action="{{ url_for('clear_identified') }}">
-    <button type="submit">Clear Identified Trees</button>
-</form>
 </html>
