@@ -5,24 +5,41 @@
 </head>
 {% extends "base.html" %}
 {% block title %}Tree Identifier{% endblock %}
+
 {% block content %}
+    <!-- Main welcome heading for the front page -->
     <h1>Welcome to the Virginia Tree Identifier</h1>
-    <div class = "tree-image-row">
+
+    <!-- Row of tree images for visual interest on the homepage -->
+    <div class="tree-image-row">
+        <!-- Cherry tree image, no border for a clean look -->
         <img src="{{ url_for('static', filename='cherry_tree.jpeg') }}" alt="Cherry tree" class="tree-image no-border">
+        <!-- Dogwood tree image, no border -->
         <img src="{{ url_for('static', filename='dogwood.jpeg') }}" alt="Dogwood tree" class="tree-image no-border">
+        <!-- Mirrored cherry tree image for symmetry, no border -->
         <img src="{{ url_for('static', filename='cherry_tree.jpeg') }}" alt="Cherry tree" class="tree-image no-border" style="transform: scaleX(-1);">
     </div>
-    <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;" >
-                <h3>Dogwood</h3>
-                <p>The Dogwood (Cornus spp.) is the Virginia state tree known for its showy flowers and distinctive bark.</p>
+
+    <!-- Brief description of the Dogwood tree, centered and styled -->
+    <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
+        <h3>Dogwood</h3>
+        <p>
+            The Dogwood (Cornus spp.) is the Virginia state tree known for its showy flowers and distinctive bark.
+        </p>
     </div>
+
+    <!-- Introduction and call-to-action for users -->
     <p>
         Discover and identify trees native to Virginia!<br>
         Click below to get started.
     </p>
+
+    <!-- Button to start the tree identification process -->
     <a href="{{ url_for('treeIdentifier') }}">
         <button class="start-btn">Start Identifying</button>
     </a>
+
+    <!-- Footer for branding and attribution -->
     <footer>
         <p>Powered by Tree Identifier</p>
     </footer>

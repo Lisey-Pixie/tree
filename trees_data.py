@@ -1,4 +1,9 @@
+# This file contains a list of dictionaries, each representing a native Virginia tree.
+# Each dictionary describes a tree's characteristics and a brief description.
+# At the end, the list is sorted alphabetically by the tree's "name" field.
+
 trees = sorted([
+    # --- Each dictionary below represents a single tree species ---
     {
         "name": "American Beech",
         "leaf_type":"compound",

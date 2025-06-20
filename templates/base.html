@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- The page title can be overridden by child templates using the 'title' block -->
     <title>{% block title %}Tree Identifier{% endblock %}</title>
+    <!-- Ensures proper scaling and responsiveness on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* Prevent horizontal scrolling and ensure the page fits the viewport */
         html, body {
             width: 100vw;
             max-width: 100vw;
             overflow-x: hidden;
         }
         body {
+            /* Set a readable font and pleasant background for the app */
             font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
             background-color: #c2e9e5;
             margin-top: 1px;
@@ -21,6 +25,7 @@
             border: 2px solid #3442a6;
             text-align: center;
         }
+        /* Main content wrapper for centering and limiting width */
         .content-wrapper {
             border: 2px solid #c2e9e5;
             padding: 5px;
@@ -33,6 +38,7 @@
         h1 {
             color: #3442a6;
         }
+        /* Style for tree images throughout the site */
         .tree-image {
             display: block;
             margin: 0 auto 20px auto;
@@ -41,6 +47,7 @@
             max-width: 300px;
             max-height: 300px;
         }
+        /* General form styling for main forms */
         form {
             background: #fff;
             padding: 20px;
@@ -52,6 +59,7 @@
         label {
             font-weight: bold;
         }
+        /* Style for text and number inputs */
         input[type="text"], input[type="number"] {
             width: 95%;
             padding: 8px;
@@ -59,6 +67,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        /* Style for submit buttons */
         input[type="submit"] {
             background: #3442a6;
             color: #fff;
@@ -70,18 +79,22 @@
         input[type="submit"]:hover {
             background: #222b6d;
         }
+        /* Remove default list styling for all unordered lists */
         ul {
             list-style-type: none;
             padding-left: 0;
         }
+        /* Add spacing between list items */
         li {
             margin-bottom: 10px;
         }
+        /* Footer styling for consistent appearance */
         footer {
             text-align: center;
             margin-top: 40px;
             color: #888;
         }
+        /* Style for the main call-to-action button */
         .start-btn {
             display: block;
             margin: 40px auto 0 auto;
@@ -95,17 +108,20 @@
             margin-top: 40px;
             text-align: center;
         }
+        /* Flexbox row for displaying multiple tree images horizontally */
         .tree-image-row {
             display: flex;
             justify-content: center;
             gap: 20px;
             align-items: flex-start;
             flex-wrap: wrap;
-            border:#c2e9e5;
+            border: #c2e9e5;
         }
+        /* Utility class to remove borders from specific images */
         .no-border {
             border: none;
         }
+        /* Utility class for inline forms (e.g., clear list button) to remove box styling */
         .inline-form {
             background: none !important;
             padding: 0 !important;
@@ -115,38 +131,41 @@
             box-shadow: none !important;
             display: inline;
         }
-    @media (max-width: 600px) {
-    body {
-        padding: 5px;
-        font-size: 1em;
-    }
-    .content-wrapper {
-        max-width: 100%;
-        padding: 2px;
-    }
-    nav > div {
-        flex-direction: column !important;
-        gap: 10px !important;
-    }
-    ul {
-        flex-direction: column !important;
-        gap: 10px !important;
-    }
-    li {
-        width: 95vw !important;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-    img.tree-image {
-        max-width: 95vw;
-        height: auto;
-    }
-}    
+        /* Responsive design: adjust layout for screens 600px wide or less */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+                font-size: 1em;
+            }
+            .content-wrapper {
+                max-width: 100%;
+                padding: 2px;
+            }
+            nav > div {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            ul {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            li {
+                width: 95vw !important;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            img.tree-image {
+                max-width: 95vw;
+                height: auto;
+            }
+        }
     </style>
+    <!-- Allow child templates to add extra head content if needed -->
     {% block head %}{% endblock %}
 </head>
 
 <body>
+    <!-- Navigation bar with links to main pages -->
     <nav style="background: #3442a6; padding: 10px 0; margin-bottom: 30px;">
         <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 30px;">
             <a href="{{ url_for('index') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Home</a>
@@ -154,6 +173,7 @@
             <a href="{{ url_for('browse') }}" style="color: #fff; text-decoration: none; font-weight: bold;">Browse</a>
         </div>
     </nav>
+    <!-- Main content area; child templates fill this block -->
     <div class="content-wrapper">
         {% block content %}
         {% endblock %}

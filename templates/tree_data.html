@@ -1,14 +1,22 @@
-  
 <!DOCTYPE html>
 <html>
 {% extends "base.html" %}
 {% block title %}{{ tree.name }} Details{% endblock %}
+
 {% block content %}
+    <!-- Main heading: Tree name -->
     <h1>{{ tree.name }}</h1>
+    
+    <!-- Tree image: uses the image filename from the tree dictionary -->
     <img src="{{ url_for('static', filename=tree.image) }}" alt="{{ tree.name }}" class="tree-image">
+    
+    <!-- Tree characteristics list -->
     <ul style="list-style: none; padding: 0; text-align: left; max-width: 400px; margin: 20px auto;">
+        <!-- Each <li> displays a characteristic of the tree.
+             If the value is a list, join with commas; otherwise, display as-is. -->
         <li><strong>Leaf Type:</strong> {{ tree.leaf_type }}</li>
         <li><strong>Leaf Number:</strong> 
+            {# Handles both single values and lists for leaf_number #}
             {% if tree.leaf_number is iterable and tree.leaf_number is not string %}
                 {{ ', '.join(tree.leaf_number) }}
             {% else %}
@@ -53,7 +61,13 @@
             {% endif %}
         </li>
     </ul>
-    <p style="max-width: 600px; margin: 20px auto;">{{ tree.description }}</p>
+    
+    <!-- Tree description paragraph -->
+    <p style="max-width: 600px; margin: 20px auto;">
+        {{ tree.description }}
+    </p>
+    
+    <!-- Navigation buttons: Back to Browse and Back to Identify -->
     <a href="{{ url_for('browse') }}">
         <button type="button">Back to Browse</button>
     </a>

@@ -1,10 +1,18 @@
 import re
-from trees_data import trees  # type: ignore
+from trees_data import trees  # Import the sorted list of tree dictionaries
 from flask import Flask, render_template, request, session, redirect, url_for
+
+# Initialize the Flask application
 app = Flask(__name__)
-app.secret_key = 'cYaL83303mF'
+app.secret_key = 'cYaL83303mF'  # Secret key for session management (should be kept secret in production)
+
+# --- Helper Functions ---
 
 def case_insensitive_match(user_value, tree_values):
+    """
+    Checks if user_value matches any value in tree_values, case-insensitively.
+    Handles both single values and lists for flexibility.
+    """
     if not isinstance(tree_values, list):
         tree_values = [tree_values]
     if isinstance(user_value, list):
@@ -18,6 +26,10 @@ def case_insensitive_match(user_value, tree_values):
     return False
 
 def identify_tree(user_description, trees):
+    """
+    Compares user input (user_description) to each tree in the list.
+    Returns a list of (tree name, score) tuples, sorted by score descending.
+    """
     match_scores = []
     total_attributes = len(user_description)
     for tree in trees:
@@ -29,22 +41,34 @@ def identify_tree(user_description, trees):
             tree_values = tree_value if isinstance(tree_value, list) else [tree_value]
             if case_insensitive_match(user_value, tree_values):
                 score += 1
+        # Only consider trees that match at least half the attributes
         if score >= total_attributes / 2:
             match_scores.append((tree['name'], score))
     match_scores.sort(key=lambda x: x[1], reverse=True)
     return match_scores
 
+# --- Flask Routes ---
+
 @app.route('/')
 def index():
+    """
+    Home page route. Renders the front page template.
+    """
     return render_template('frontPage.html')
 
 @app.route('/treeIdentifier', methods=['GET', 'POST'])
 def treeIdentifier():
-    matches = []
-    description = None
-    image = None
-    tree_name = "Dogwood"
-    error = None
+    """
+    Main tree identifier page.
+    Handles form submission, validation, matching, and session tracking of identified trees.
+    """
+    matches = []         # List of possible tree matches
+    description = None   # Description of the selected tree
+    image = None         # Image filename of the selected tree
+    tree_name = "Dogwood"  # Default tree name
+    error = None         # Error message for form validation
+
+    # Default user description (empty fields)
     user_description = {
         "leaf_type": "",
         "leaf_number": "",
@@ -56,7 +80,9 @@ def treeIdentifier():
         "texture": "",
         "leaf_autum": "",
     }
+
     if request.method == 'POST':
+        # Collect user input from the form
         user_description = {
             "leaf_type": request.form.get("leaf_type", ""),
             "leaf_number": request.form.get("leaf_number", ""),
@@ -68,7 +94,8 @@ def treeIdentifier():
             "texture": request.form.get("texture", ""),
             "leaf_autum": request.form.get("leaf_autum", ""),
         }
-        # --- Input validation ---
+
+        # --- Input validation: ensure all fields are valid selections ---
         valid_leaf_types = ["simple", "compound"]
         valid_leaf_shapes = ["lobed", "palmate", "oval", "elliptical", "needles", "diamond", "lanceolate", "ovate", "heart-shaped", "triangular"]
         valid_leaf_sizes = ["small", "medium", "large"]
@@ -78,6 +105,7 @@ def treeIdentifier():
         valid_textures = ["smooth", "rough"]
         valid_leaf_autums = ["red", "yellow", "orange", "copper", "brown", "purple", "gold", "evergreen"]
 
+        # Validate each field and set an error message if invalid
         if not user_description["leaf_type"] or user_description["leaf_type"] not in valid_leaf_types:
             error = "Please select 'simple' or 'compound' for leaf type."
         elif not user_description["leaf_shape"] or user_description["leaf_shape"] not in valid_leaf_shapes:
@@ -94,10 +122,13 @@ def treeIdentifier():
             error = "Please select a valid leaf texture."
         elif not user_description["leaf_autum"] or user_description["leaf_autum"] not in valid_leaf_autums:
             error = "Please select a valid autumn color."
+        # Validate leaf_number: must be a number or comma-separated numbers
         elif not user_description["leaf_number"] or not re.match(r'^\d+(,\s*\d+)*$', user_description["leaf_number"]):
             error = "Please enter a valid number or comma-separated numbers for leaflets or needles."
         else:
+            # If all inputs are valid, find matching trees
             matches = identify_tree(user_description, trees)
+            # If user requested a description for a selected tree
             if request.form.get("get_description") and request.form.get("tree_choice"):
                 chosen = request.form.get("tree_choice")
                 for tree in trees:
@@ -110,7 +141,9 @@ def treeIdentifier():
                             session["identified_trees"] = []
                         if chosen not in session["identified_trees"]:
                             session["identified_trees"].append(chosen)
-                        session.modified = True
+                        session.modified = True  # Mark session as modified to ensure it saves
+
+    # Render the identifier page with all relevant variables
     return render_template(
         'treeIdentifier.html',
         matches=matches,
@@ -123,19 +156,30 @@ def treeIdentifier():
 
 @app.route('/browse')
 def browse():
+    """
+    Browse page route. Shows all trees in a grid/list.
+    """
     return render_template('browse.html', trees=trees)
 
 @app.route('/tree/<name>')
 def tree_data(name):
+    """
+    Tree detail page route. Shows details for a single tree by name.
+    """
     tree = next((t for t in trees if t['name'].lower() == name.lower()), None)
     if tree:
         return render_template('tree_data.html', tree=tree)
     else:
         return "Tree not found", 404
+
 @app.route('/clear_identified', methods=['POST'])
 def clear_identified():
+    """
+    Clears the list of identified trees from the user's session.
+    """
     session.pop('identified_trees', None)
     return redirect(url_for('treeIdentifier'))
 
+# --- Run the Flask app in debug mode if this file is executed directly ---
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,22 +5,28 @@
 </head>
 {% extends "base.html" %}
 {% block title %}Tree Identifier{% endblock %}
+
 {% block content %}
+    <!-- Main heading for the identifier page -->
     <h1>Virginia Tree Identifier</h1>
+
+    <!-- If an image and description are available (after a tree is selected), show them -->
     {% if image %}
         <img src="{{ url_for('static', filename=image) }}" alt="Tree Image" class="tree-image">
         <div style="text-align: center; font-size:1.2em; font-weight:bold; margin-bottom:20px;">
             <h3>{{ tree_name }}</h3>
             <p>{{ description }}</p>
         </div>
-    {% else %}
-       
     {% endif %}
 
     <br>
-        {% if matches %}
+
+    <!-- Show the top 3 possible matches after the user submits the form -->
+    {% if matches %}
         <h2>Top 3 Possible Matches:</h2>
+        <!-- Form to select one of the matches and get its description -->
         <form method="post">
+            <!-- Hidden fields to preserve user input when submitting for description -->
             <input type="hidden" name="leaf_type" value="{{ user_description.leaf_type }}">
             <input type="hidden" name="leaf_number" value="{{ user_description.leaf_number }}">
             <input type="hidden" name="leaf_shape" value="{{ user_description.leaf_shape }}">
@@ -31,20 +37,23 @@
             <input type="hidden" name="texture" value="{{ user_description.texture }}">
             <input type="hidden" name="leaf_autum" value="{{ user_description.leaf_autum }}">
             <ul>
-            {% for name, score in matches[:3] %}
-                <li>
-                    <input type="radio" name="tree_choice" value="{{ name }}" id="{{ name }}">
-                    <label for="{{ name }}">{{ name }} (score: {{ score }})</label>
-                </li>
-            {% endfor %}
+                <!-- List the top 3 matches with radio buttons for selection -->
+                {% for name, score in matches[:3] %}
+                    <li>
+                        <input type="radio" name="tree_choice" value="{{ name }}" id="{{ name }}">
+                        <label for="{{ name }}">{{ name }} (score: {{ score }})</label>
+                    </li>
+                {% endfor %}
             </ul>
             <input type="submit" name="get_description" value="Get Description">
         </form>
     {% endif %}
 
+    <!-- Tree identification form for user input -->
     <h2>Identify a Tree</h2>
     <p>To identify a tree, please provide the following information about its leaves:</p>
     <form method="post">
+        <!-- Dropdown for leaf type -->
         <label>Is the leaf simple or compound?</label>
         <select name="leaf_type">
             <option value="">Select...</option>
@@ -52,9 +61,11 @@
             <option value="compound" {% if user_description.leaf_type == 'compound' %}selected{% endif %}>Compound</option>
         </select><br><br>
 
+        <!-- Input for number of leaflets or needles -->
         <label>How many leaflets, or needles in a cluster? (comma separated for multiple values, e.g., 5, 7, 9):</label>
         <input name="leaf_number" value="{{ user_description.leaf_number }}"><br><br>
 
+        <!-- Dropdown for leaf shape -->
         <label>How is the leaf shaped?</label>
         <select name="leaf_shape">
             <option value="">Select...</option>
@@ -70,6 +81,7 @@
             <option value="triangular" {% if user_description.leaf_shape == 'triangular' %}selected{% endif %}>Triangular</option>
         </select><br><br>
 
+        <!-- Dropdown for leaf size -->
         <label>What is the size of the leaf?</label>
         <select name="leaf_size">
             <option value="">Select...</option>
@@ -78,6 +90,7 @@
             <option value="large" {% if user_description.leaf_size == 'large' %}selected{% endif %}>Large</option>
         </select><br><br>
 
+        <!-- Dropdown for leaf color -->
         <label>What is the leaf color?</label>
         <select name="leaf_color">
             <option value="">Select...</option>
@@ -90,6 +103,7 @@
             <option value="gold" {% if user_description.leaf_color == 'gold' %}selected{% endif %}>Gold</option>
         </select><br><br>
 
+        <!-- Dropdown for leaf edge -->
         <label>What is the leaf edge like?</label>
         <select name="leaf_edge">
             <option value="">Select...</option>
@@ -100,6 +114,7 @@
             <option value="sharp" {% if user_description.leaf_edge == 'sharp' %}selected{% endif %}>Sharp</option>
         </select><br><br>
 
+        <!-- Dropdown for venation -->
         <label>What is the leaf venation?</label>
         <select name="venation">
             <option value="">Select...</option>
@@ -108,6 +123,7 @@
             <option value="parallel" {% if user_description.venation == 'parallel' %}selected{% endif %}>Parallel</option>
         </select><br><br>
 
+        <!-- Dropdown for texture -->
         <label>How is the texture of the leaf?</label>
         <select name="texture">
             <option value="">Select...</option>
@@ -115,6 +131,7 @@
             <option value="rough" {% if user_description.texture == 'rough' %}selected{% endif %}>Rough</option>
         </select><br><br>
 
+        <!-- Dropdown for autumn color -->
         <label>What color does the leaf turn in autumn?</label>
         <select name="leaf_autum">
             <option value="">Select...</option>
@@ -128,33 +145,41 @@
             <option value="evergreen" {% if user_description.leaf_autum == 'evergreen' %}selected{% endif %}>Evergreen</option>
         </select><br><br>
 
+        <!-- Submit and Reset buttons -->
         <input type="submit" value="Identify">
+        <!-- Reset button reloads the page to clear all fields and results -->
         <button type="button" onclick="window.location.href=window.location.pathname" style="margin-left:10px;">Reset</button>
     </form>
 
-
-
+    <!-- If a tree description is available, display it -->
     {% if description %}
         <h2>Description:</h2>
         <p>{{ description }}</p>
     {% endif %}
+
+    <!-- Button to return to the home page -->
     <a href="{{ url_for('index') }}">
         <button type="button">Back to Home</button>
     </a>
+
+    <!-- If the user has identified trees, show the list and a clear button -->
     {% if session.identified_trees %}
-    <h2>Trees You Have Identified:</h2>
-    <ul>
-        {% for tname in session.identified_trees %}
-            <li>
-                <a href="{{ url_for('tree_data', name=tname) }}">{{ tname }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <form method="post" action="{{ url_for('clear_identified') }}" class="inline-form">
-        <button type="submit">Clear Identified Trees</button>
-    </form>
+        <h2>Trees You Have Identified:</h2>
+        <ul>
+            {% for tname in session.identified_trees %}
+                <li>
+                    <a href="{{ url_for('tree_data', name=tname) }}">{{ tname }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- Inline form to clear the identified trees list -->
+        <form method="post" action="{{ url_for('clear_identified') }}" class="inline-form">
+            <button type="submit">Clear Identified Trees</button>
+        </form>
     {% endif %}
+
     <br>
+    <!-- Footer for the page -->
     <footer>
         <p>Powered by Tree Identifier</p>
     </footer>
